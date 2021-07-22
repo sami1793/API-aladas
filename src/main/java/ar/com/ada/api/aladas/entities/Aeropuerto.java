@@ -8,7 +8,7 @@ public class Aeropuerto {
     
     @Id
     @Column(name="aeropuerto_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY) no es autoincremental en tabla
     private Integer aeropuertoId;
 
     @Column(name="nombre_aeropuerto")
