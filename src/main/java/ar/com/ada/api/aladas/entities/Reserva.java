@@ -72,7 +72,32 @@ public class Reserva {
         this.vuelo = vuelo;
     }
 
-    
+    public enum EstadoReservaEnum {
+        CREADO(1), TRANSMITIENDO_AL_PG(2), ERROR_AL_CONECTAR_PG(3), PENDIENTE_DE_PAGO(4),
+        PAGADO(5), CANCELADO_POR_USUARIO(6);
+
+        private final int value;
+
+        //constructor ENUM tiene que estar en privado
+        private EstadoReservaEnum(Integer value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+
+        public static EstadoReservaEnum parse(Integer id) {
+            EstadoReservaEnum status = null; // Default
+            for (EstadoReservaEnum item : EstadoReservaEnum.values()) {
+                if (item.getValue() == id) {
+                    status = item;
+                    break;
+                }
+            }
+            return status;
+        }
+    }
 
     
 
