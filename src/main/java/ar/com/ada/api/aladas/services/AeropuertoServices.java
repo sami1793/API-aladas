@@ -1,12 +1,13 @@
 package ar.com.ada.api.aladas.services;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.ada.api.aladas.entities.Aeropuerto;
 import ar.com.ada.api.aladas.repos.AeropuertoRepository;
+import net.bytebuddy.asm.Advice.Return;
 
 @Service
 public class AeropuertoServices {
@@ -29,6 +30,20 @@ public class AeropuertoServices {
     public List<Aeropuerto> obtenerTodos(){
 
         return repo.findAll();
+    }
+
+    public Aeropuerto buscarAeropuerto(Integer aeropuertoId){
+        Optional <Aeropuerto> resultado= repo.findById(aeropuertoId);
+        if(resultado.isPresent()){
+            return resultado.get();
+        }
+        else return null;
+    }
+
+    public boolean existeAeropuertoId(Integer aeropuertoId){
+        if(buscarAeropuerto(aeropuertoId)!=null)
+            return true;
+        else return false;
     }
 
 }
