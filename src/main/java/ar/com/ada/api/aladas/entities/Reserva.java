@@ -32,6 +32,9 @@ public class Reserva {
     @Column(name = "fecha_vencimiento")
     private Date fechaVencimiento;
 
+    @OneToOne(mappedBy = "reserva", cascade = CascadeType.ALL, fetch = FetchType.EAGER)//como es solo 1 a 1 no es necesario LAZY
+    private Pasaje pasaje;
+
     public Integer getReservaId() {
         return reservaId;
     }
@@ -46,6 +49,15 @@ public class Reserva {
 
     public void setPasajero(Pasajero pasajero) {
         this.pasajero = pasajero;
+    }
+        
+
+    public EstadoReservaEnum getEstadoReservaId() {
+        return EstadoReservaEnum.parse(estadoReservaId);
+    }
+
+    public void setEstadoReservaId(EstadoReservaEnum estadoReservaId) {
+        this.estadoReservaId = estadoReservaId.getValue();
     }
 
     public Date getFechaEmision() {
@@ -72,9 +84,28 @@ public class Reserva {
         this.vuelo = vuelo;
     }
 
+    
+    public Pasaje getPasaje() {
+        return pasaje;
+    }
+
+    public void setPasaje(Pasaje pasaje) {
+        this.pasaje = pasaje;
+        pasaje.setReserva(this);//relacion bidireccional
+    }
+
+    //realacion bidireccional que hcieron las chicas
+    //yo directamente lo hago en el setter
+    public void asociarPasaje(Pasaje pasaje){
+        this.pasaje = pasaje;
+        pasaje.setReserva(this);
+    }
+
+
     public enum EstadoReservaEnum {
         CREADO(1), TRANSMITIENDO_AL_PG(2), ERROR_AL_CONECTAR_PG(3), PENDIENTE_DE_PAGO(4),
-        PAGADO(5), CANCELADO_POR_USUARIO(6);
+        PAGADO(5), CANCELADO_POR_USUARIO(6), CANCELADO_POR_EMPRESA(7), PAGO_RECHAZADO(8),
+        EXPIRADO(9), EMITIDO(10);
 
         private final int value;
 
