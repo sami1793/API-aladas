@@ -105,14 +105,14 @@ public class Usuario {
 
 
 
-    public Integer getTipoUsuarioId() {
-        return tipoUsuarioId;
+    public TipoUsuarioEnum getTipoUsuarioId() {
+        return TipoUsuarioEnum.parse(this.tipoUsuarioId);
     }
 
 
 
-    public void setTipoUsuarioId(Integer tipoUsuarioId) {
-        this.tipoUsuarioId = tipoUsuarioId;
+    public void setTipoUsuarioId(TipoUsuarioEnum tipoUsuarioId) {
+        this.tipoUsuarioId = tipoUsuarioId.getValue();
     }
 
 
@@ -142,7 +142,7 @@ public class Usuario {
 
 
     public enum TipoUsuarioEnum {
-        STAFF(1), PASAJERO(2);
+        STAFF(1), PASAJERO(2);//1 tiene alias staff
 
         private final int value;
 
