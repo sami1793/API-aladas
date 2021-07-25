@@ -22,10 +22,10 @@ public class Vuelo {
     private Integer capacidad;
 
     @Column(name = "aeropuerto_origen")//onetomany
-    private Aeropuerto aeropuertoOrigen;
+    private Integer aeropuertoOrigen;//preguntar por que Integer
 
     @Column(name = "aeropuerto_destino")
-    private Aeropuerto aeropuertoDestino;
+    private Integer aeropuertoDestino;
 
     private BigDecimal precio;
 
@@ -69,19 +69,19 @@ public class Vuelo {
         this.capacidad = capacidad;
     }
 
-    public Aeropuerto getAeropuertoOrigen() {
+    public Integer getAeropuertoOrigen() {
         return aeropuertoOrigen;
     }
 
-    public void setAeropuertoOrigen(Aeropuerto aeropuertoOrigen) {
+    public void setAeropuertoOrigen(Integer aeropuertoOrigen) {
         this.aeropuertoOrigen = aeropuertoOrigen;
     }
 
-    public Aeropuerto getAeropuertoDestino() {
+    public Integer getAeropuertoDestino() {
         return aeropuertoDestino;
     }
 
-    public void setAeropuertoDestino(Aeropuerto aeropuertoDestino) {
+    public void setAeropuertoDestino(Integer aeropuertoDestino) {
         this.aeropuertoDestino = aeropuertoDestino;
     }
 

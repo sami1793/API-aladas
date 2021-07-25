@@ -19,7 +19,7 @@ public class Reserva {
     @JoinColumn(name = "vuelo_id", referencedColumnName = "vuelo_id")
     private Vuelo vuelo;//muchas reservas para un mismo vuelo
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "pasajero_id", referencedColumnName = "pasajero_id")
     @JsonIgnore//sino me va a imprimir todo lo que lleva pasajero y adentro tiene una lista reserv
     private Pasajero pasajero;
