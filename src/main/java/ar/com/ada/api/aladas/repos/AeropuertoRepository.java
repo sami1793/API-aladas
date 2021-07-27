@@ -8,4 +8,5 @@ import ar.com.ada.api.aladas.entities.Aeropuerto;
 @Repository
 public interface AeropuertoRepository extends JpaRepository<Aeropuerto, Integer> {//va Integer porque la PK es Integer
     
+    public Aeropuerto findByCodigoIATA(String codigoIATA);
 }

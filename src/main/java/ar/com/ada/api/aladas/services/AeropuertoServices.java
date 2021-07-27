@@ -46,4 +46,9 @@ public class AeropuertoServices {
         else return false;
     }
 
+    public Aeropuerto buscarPorCodigoIATA(String codigoIATA){
+        return repo.findByCodigoIATA(codigoIATA);
+
+    }
+
 }
