@@ -47,7 +47,7 @@ class AladasApplicationTests {
 
 		String codigoIATAOk1="EZE";
 		String codigoIATAOk2="AEP";
-		String codigoIATAOk3="  ";
+		String codigoIATAOk3="SA ";
 
 		Aeropuerto aeropuerto1 = new Aeropuerto();
 		Aeropuerto aeropuerto2 = new Aeropuerto();
@@ -65,6 +65,9 @@ class AladasApplicationTests {
 
 		//usando el metodo del services
 		assertTrue(aeropuertoServices.validarCodigoIATA(aeropuerto1));
+
+		//Uso un IATA que esta mal por eso pongo FALSE
+		assertFalse(aeropuertoServices.validarCodigoIATA(aeropuerto3));
 	}
 
 	
