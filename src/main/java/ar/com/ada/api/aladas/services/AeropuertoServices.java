@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ar.com.ada.api.aladas.entities.Aeropuerto;
 import ar.com.ada.api.aladas.repos.AeropuertoRepository;
-import net.bytebuddy.asm.Advice.Return;
+
 
 @Service
 public class AeropuertoServices {
@@ -49,6 +49,15 @@ public class AeropuertoServices {
     public Aeropuerto buscarPorCodigoIATA(String codigoIATA){
         return repo.findByCodigoIATA(codigoIATA);
 
+    }
+
+    public boolean validarCodigoIATA(Aeropuerto aeropuerto){
+
+        if(aeropuerto.getCodigoIATA().length()==3){
+            return true;
+        }
+        else    
+            return false;
     }
 
 }

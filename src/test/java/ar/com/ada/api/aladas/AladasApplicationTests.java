@@ -8,17 +8,19 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import ar.com.ada.api.aladas.entities.Aeropuerto;
 import ar.com.ada.api.aladas.entities.Vuelo;
+import ar.com.ada.api.aladas.services.AeropuertoServices;
 import ar.com.ada.api.aladas.services.VueloServices;
 
 @SpringBootTest
 class AladasApplicationTests {
 
-	/*@Test
-	void contextLoads() {
-	}*/
 	@Autowired
 	VueloServices vueloServices;
+
+	@Autowired
+	AeropuertoServices aeropuertoServices;
 
 	@Test
 	void vueloTestPrecioNegativo(){
@@ -38,6 +40,68 @@ class AladasApplicationTests {
 		vueloPrecioOk.setPrecio(new BigDecimal(100));
 
 		assertTrue(vueloServices.validarPrecio(vueloPrecioOk));
+	}
+
+	@Test
+	void aeropuertoTestValidarCodigoIATAOK(){
+
+		String codigoIATAOk1="EZE";
+		String codigoIATAOk2="AEP";
+		String codigoIATAOk3="  ";
+
+		Aeropuerto aeropuerto1 = new Aeropuerto();
+		Aeropuerto aeropuerto2 = new Aeropuerto();
+		Aeropuerto aeropuerto3 = new Aeropuerto();
+
+		//forma equals
+		assertEquals(3, codigoIATAOk1.length());
+
+		//forma true
+		assertTrue(codigoIATAOk1.length()==3);
+
+		aeropuerto1.setCodigoIATA(codigoIATAOk1);
+		aeropuerto2.setCodigoIATA(codigoIATAOk2);
+		aeropuerto3.setCodigoIATA(codigoIATAOk3);
+
+		//usando el metodo del services
+		assertTrue(aeropuertoServices.validarCodigoIATA(aeropuerto1));
+	}
+
+	
+	@Test
+	void aeropuertoTestValidarCodigoIATANoOK(){
+
+	}
+
+	@Test
+	void vueloVerificarValidacionAeropuertoOrigenDestino(){
+		//si es difernte origen y destino
+		//otras cosas que se me ocurran
+	}
+
+	@Test
+	void vueloChequearQueLosPendientesNoTenganVuelosViejos(){
+		//limpiar vuelos viejos?
+		//que no se liste un vuelo que ya salio
+
+		//queremos validar que cuando hagamos un método que traiga los vuelos actuales
+		//para hacer resrvas, no haya vuelos en el pasado
+	}
+
+	@Test
+	void vueloVerificarCapacidadMinima(){
+
+	}
+
+	@Test
+	void vueloVerificarCapacidadMaxima(){
+
+	}
+
+
+	@Test
+	void aeropuertoTestBuscarCodigoIATA(){
+
 	}
 
 }
