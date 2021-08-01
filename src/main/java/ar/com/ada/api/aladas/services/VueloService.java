@@ -58,6 +58,12 @@ public class VueloService {
         if(!validarAeropuertoOrigenDiffDestino(vuelo))
             return ValidacionVueloDataEnum.ERROR_AEROPUERTOS_IGUALES;
 
+        if(!validarAeropuertoOrigen(vuelo))//si NO existe
+            return ValidacionVueloDataEnum.ERROR_AEROPUERTO_ORIGEN;
+
+        if(!validarAeropuertoDestino(vuelo))
+            return ValidacionVueloDataEnum.ERROR_AEROPUERTO_DESTINO;
+
         
         return ValidacionVueloDataEnum.OK;
     }
@@ -73,6 +79,14 @@ public class VueloService {
     public boolean validarAeropuertoOrigenDiffDestino(Vuelo vuelo){
 
         return vuelo.getAeropuertoOrigen()!=vuelo.getAeropuertoDestino();//verifico que sean diferentes
+    }
+
+    public boolean validarAeropuertoOrigen(Vuelo vuelo){
+        return aeroservices.existeAeropuertoId(vuelo.getAeropuertoOrigen());
+    }
+
+    public boolean validarAeropuertoDestino(Vuelo vuelo){
+        return aeroservices.existeAeropuertoId(vuelo.getAeropuertoDestino());
     }
 
     public enum ValidacionVueloDataEnum{
