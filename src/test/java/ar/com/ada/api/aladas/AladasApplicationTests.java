@@ -4,23 +4,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 
+import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import ar.com.ada.api.aladas.entities.Aeropuerto;
 import ar.com.ada.api.aladas.entities.Vuelo;
-import ar.com.ada.api.aladas.services.AeropuertoServices;
-import ar.com.ada.api.aladas.services.VueloServices;
+import ar.com.ada.api.aladas.entities.Vuelo.EstadoVueloEnum;
+import ar.com.ada.api.aladas.services.AeropuertoService;
+import ar.com.ada.api.aladas.services.VueloService;
+import ar.com.ada.api.aladas.services.VueloService.ValidacionVueloDataEnum;
 
 @SpringBootTest
 class AladasApplicationTests {
 
 	@Autowired
-	VueloServices vueloServices;
+	VueloService vueloServices;
 
 	@Autowired
-	AeropuertoServices aeropuertoServices;
+	AeropuertoService aeropuertoServices;
 
 	@Test
 	void vueloTestPrecioNegativo(){
@@ -78,6 +81,17 @@ class AladasApplicationTests {
 
 	@Test
 	void vueloVerificarValidacionAeropuertoOrigenDestino(){
+
+		//funciona mal verificar el id 	que se crea
+		Vuelo vuelo = new Vuelo(); 
+		String aeropuertoOrigen = "EZE";
+		String aeropuertoDestino="NQN";
+
+		
+		vuelo.setAeropuertoOrigen(aeropuertoServices.buscarPorCodigoIATA(aeropuertoOrigen).getAeropuertoId());
+		vuelo.setAeropuertoDestino(aeropuertoServices.buscarPorCodigoIATA(aeropuertoDestino).getAeropuertoId());
+
+		assertTrue(vueloServices.validarAeropuertoOrigenDiffDestino(vuelo));
 		//si es difernte origen y destino
 		//otras cosas que se me ocurran
 	}
@@ -105,6 +119,17 @@ class AladasApplicationTests {
 	@Test
 	void aeropuertoTestBuscarCodigoIATA(){
 
+	}
+
+	@Test
+	void vueloValidarVueloMismoDestino(){
+		Vuelo vuelo = new Vuelo();
+		vuelo.setPrecio(new BigDecimal(100));
+		vuelo.setEstadoVueloId(EstadoVueloEnum.CREADO);
+		vuelo.setAeropuertoDestino(116);
+		vuelo.setAeropuertoOrigen(116);
+
+		assertEquals(ValidacionVueloDataEnum.ERROR_AEROPUERTOS_IGUALES,vueloServices.validar(vuelo));
 	}
 
 }

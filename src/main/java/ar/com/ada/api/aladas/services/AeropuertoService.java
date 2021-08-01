@@ -10,7 +10,7 @@ import ar.com.ada.api.aladas.repos.AeropuertoRepository;
 
 
 @Service
-public class AeropuertoServices {
+public class AeropuertoService {
     
     @Autowired
     AeropuertoRepository repo;//declarar al repo

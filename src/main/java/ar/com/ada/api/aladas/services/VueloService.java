@@ -8,19 +8,24 @@ import org.springframework.stereotype.Service;
 
 import ar.com.ada.api.aladas.entities.Aeropuerto;
 import ar.com.ada.api.aladas.entities.Vuelo;
+import ar.com.ada.api.aladas.entities.Vuelo.EstadoVueloEnum;
 import ar.com.ada.api.aladas.repos.VueloRepository;
 
 @Service
-public class VueloServices {
+public class VueloService {
     
     @Autowired
     private VueloRepository repo;
 
     @Autowired
-    private AeropuertoServices aeroservices;
+    private AeropuertoService aeroservices;
 
     public void crear(Vuelo vuelo){
+        
+        vuelo.setEstadoVueloId(EstadoVueloEnum.CREADO);
         repo.save(vuelo);
+        
+        
     }
 
     //estado vuelo no hace falta ya va a estar en creado

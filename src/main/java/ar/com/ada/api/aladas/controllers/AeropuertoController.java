@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.*;
 
 import ar.com.ada.api.aladas.entities.Aeropuerto;
 import ar.com.ada.api.aladas.models.response.GenericResponse;
-import ar.com.ada.api.aladas.services.AeropuertoServices;
+import ar.com.ada.api.aladas.services.AeropuertoService;
 
 @RestController
 public class AeropuertoController {
     @Autowired
-    AeropuertoServices service;
+    AeropuertoService service;
 
     @PostMapping("/api/aeropuertos")
     public ResponseEntity<GenericResponse> crear(@RequestBody Aeropuerto aeropuerto){
