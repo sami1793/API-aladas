@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ar.com.ada.api.aladas.entities.Aeropuerto;
 import ar.com.ada.api.aladas.entities.Vuelo;
+import ar.com.ada.api.aladas.entities.Reserva.EstadoReservaEnum;
 import ar.com.ada.api.aladas.entities.Vuelo.EstadoVueloEnum;
 import ar.com.ada.api.aladas.repos.VueloRepository;
 
@@ -102,4 +103,10 @@ public class VueloService {
     public void actualizar(Vuelo vuelo) {
         repo.save(vuelo);
     }
+
+    public List<Vuelo> traerVuelosAbiertos() {
+        return repo.findByEstadoVueloId(EstadoVueloEnum.ABIERTO.getValue());
+    }
+
+
 }

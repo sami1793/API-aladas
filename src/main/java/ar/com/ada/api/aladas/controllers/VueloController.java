@@ -1,12 +1,10 @@
 package ar.com.ada.api.aladas.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import ar.com.ada.api.aladas.entities.Vuelo;
 import ar.com.ada.api.aladas.models.request.EstadoVueloRequest;
@@ -66,5 +64,10 @@ public class VueloController {
             respuesta.message = "Estado actualizado";
 
             return ResponseEntity.ok(respuesta);
+    }
+
+    @GetMapping("/api/vuelos/abiertos")
+    public ResponseEntity<List<Vuelo>> getVuelosAbiertos(){
+        return ResponseEntity.ok(service.traerVuelosAbiertos());
     }
 }
