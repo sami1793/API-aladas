@@ -14,7 +14,6 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usuario_id")
     private Integer usuarioId;
-
     
     @NaturalId
     private String username;
@@ -36,103 +35,75 @@ public class Usuario {
     @OneToOne
     @JoinColumn(name = "pasajero_id", referencedColumnName = "pasajero_id")
     private Pasajero pasajero;
-
     
     public Integer getUsuarioId() {
         return usuarioId;
     }
 
-
-
     public void setUsuarioId(Integer usuarioId) {
         this.usuarioId = usuarioId;
     }
-
-
 
     public String getUsername() {
         return username;
     }
 
-
-
     public void setUsername(String username) {
         this.username = username;
     }
-
-
 
     public String getPassword() {
         return password;
     }
 
-
-
     public void setPassword(String password) {
         this.password = password;
     }
-
-
 
     public String getEmail() {
         return email;
     }
 
-
-
     public void setEmail(String email) {
         this.email = email;
     }
-
-
 
     public Date getFechaLogin() {
         return fechaLogin;
     }
 
-
-
     public void setFechaLogin(Date fechaLogin) {
         this.fechaLogin = fechaLogin;
     }
-
-
 
     public TipoUsuarioEnum getTipoUsuarioId() {
         return TipoUsuarioEnum.parse(this.tipoUsuarioId);
     }
 
-
-
-    public void setTipoUsuarioId(TipoUsuarioEnum tipoUsuarioId) {
+    public void setTipoUsuarioId(TipoUsuarioEnum tipoUsuarioId) {//en el otro codigo es sin Id
         this.tipoUsuarioId = tipoUsuarioId.getValue();
     }
-
-
 
     public Staff getStaff() {
         return staff;
     }
 
-
-
     public void setStaff(Staff staff) {
         this.staff = staff;
     }
-
-
 
     public Pasajero getPasajero() {
         return pasajero;
     }
 
-
-
     public void setPasajero(Pasajero pasajero) {
         this.pasajero = pasajero;
     }
 
-
+    public Integer obtenerEntityId() {
+        // TODO, segun el tipo de usuario, devolver el pasajeroId o staffId o nada!
+        return null;
+    }
 
     public enum TipoUsuarioEnum {
         STAFF(1), PASAJERO(2);//1 tiene alias staff
