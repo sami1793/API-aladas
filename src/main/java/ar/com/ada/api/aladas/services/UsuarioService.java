@@ -57,7 +57,7 @@ public class UsuarioService {
 
         usuario.setTipoUsuarioId(tipoUsuario);
         usuario.setEmail(email);
-        usuario.setPassword(password);
+        usuario.setPassword(Crypto.encrypt(password, email.toLowerCase()));//para que no cambie si lo puse en mayúscula
         usuario.setUsername(email);
         
         if(tipoUsuario == TipoUsuarioEnum.PASAJERO){
