@@ -79,7 +79,9 @@ public class VueloService {
 
     public boolean validarAeropuertoOrigenDiffDestino(Vuelo vuelo){
 
-        return vuelo.getAeropuertoOrigen()!=vuelo.getAeropuertoDestino();//verifico que sean diferentes
+        //return vuelo.getAeropuertoOrigen()!=vuelo.getAeropuertoDestino();//verifico que sean diferentes
+        //return vuelo.getAeropuertoOrigen().equals(vuelo.getAeropuertoDestino());// porque como integer es objeto, se compara con equals
+        return vuelo.getAeropuertoOrigen().intValue()!=vuelo.getAeropuertoDestino().intValue();
     }
 
     public boolean validarAeropuertoOrigen(Vuelo vuelo){
