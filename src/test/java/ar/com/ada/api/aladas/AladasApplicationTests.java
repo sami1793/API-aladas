@@ -2,6 +2,7 @@ package ar.com.ada.api.aladas;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import java.math.BigDecimal;
 
 import org.assertj.core.api.Assert;
@@ -10,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import ar.com.ada.api.aladas.entities.Aeropuerto;
+import ar.com.ada.api.aladas.entities.Usuario;
 import ar.com.ada.api.aladas.entities.Vuelo;
 import ar.com.ada.api.aladas.entities.Vuelo.EstadoVueloEnum;
+import ar.com.ada.api.aladas.security.Crypto;
 import ar.com.ada.api.aladas.services.AeropuertoService;
 import ar.com.ada.api.aladas.services.VueloService;
 import ar.com.ada.api.aladas.services.VueloService.ValidacionVueloDataEnum;
@@ -130,6 +133,28 @@ class AladasApplicationTests {
 		vuelo.setAeropuertoOrigen(116);
 
 		assertEquals(ValidacionVueloDataEnum.ERROR_AEROPUERTOS_IGUALES,vueloServices.validar(vuelo));
+	}
+
+	@Test
+	void testearEncriptacion(){
+		String contraseñaImaginaria = "pitufosasesinos";
+		String contraseñaImaginariaEncriptada= Crypto.encrypt(contraseñaImaginaria, "palabra");
+
+		String contraseñaImaginariaDesencriptada=Crypto.decrypt(contraseñaImaginariaEncriptada, "palabra");
+
+		//assertTrue(contraseñaImaginaria.equals(contraseñaImaginariaDesencriptada));
+		assertEquals(contraseñaImaginaria, contraseñaImaginariaDesencriptada);
+	}
+	@Test
+	void testearContraseña(){
+		Usuario usuario= new Usuario();
+		//esto es lo que va en la base de datos
+		usuario.setUsername("jonr@gmail.com");
+		usuario.setPassword("SJsPgk5Z3cYrWtrRNeON5A==");
+		usuario.setEmail("jonr@gmail.com");
+
+		assertFalse(!usuario.getPassword().equals(Crypto.encrypt("jon123", usuario.getUsername())));
+
 	}
 
 }

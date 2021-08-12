@@ -46,6 +46,10 @@ public class AeropuertoService {
         else return false;
     }
 
+    public boolean existeAeropuertoIdV2(Integer aeropuertoId){
+        return repo.existsById(aeropuertoId);
+    }
+
     public Aeropuerto buscarPorCodigoIATA(String codigoIATA){
         return repo.findByCodigoIATA(codigoIATA);
 
