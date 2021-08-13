@@ -14,4 +14,8 @@ public class PasajeroService {
     public void crearPasajero(Pasajero pasajero){
         repo.save(pasajero);
     }
+
+    public Pasajero buscarPorId(Integer pasajeroId){
+        return repo.findByPasajeroId(pasajeroId);
+    }
 }
