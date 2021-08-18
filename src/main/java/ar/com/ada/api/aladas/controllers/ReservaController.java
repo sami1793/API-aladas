@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import ar.com.ada.api.aladas.entities.Reserva;
 import ar.com.ada.api.aladas.entities.Usuario;
 import ar.com.ada.api.aladas.entities.Usuario.TipoUsuarioEnum;
+import ar.com.ada.api.aladas.models.request.EstadoReservaRequest;
 import ar.com.ada.api.aladas.models.request.InfoReservaNueva;
 import ar.com.ada.api.aladas.models.request.InfoReservaNuevaV2;
 import ar.com.ada.api.aladas.models.response.GenericResponse;
@@ -73,5 +74,20 @@ public class ReservaController {
 
         return ResponseEntity.ok(respuesta);
 
+    }
+    @PutMapping("api/reservas/{id}/estados")
+    public ResponseEntity<GenericResponse> eliminarReserva(@PathVariable Integer id, 
+    @RequestBody EstadoReservaRequest estadoReserva){
+
+        GenericResponse respuesta =  new GenericResponse();
+
+        Reserva reserva = services.buscarPorId(id);
+        reserva.setEstadoReservaId(estadoReserva.estado);
+        services.actualizar(reserva);
+
+        respuesta.isOk=true;
+        respuesta.message="Estado reserva actualizado correctamente";
+
+        return ResponseEntity.ok(respuesta);
     }
 }

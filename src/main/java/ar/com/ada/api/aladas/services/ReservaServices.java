@@ -59,6 +59,15 @@ public class ReservaServices {
         return reserva;
     }
 
+    public void expirarReserva(Integer reservaId) {
+        Reserva reserva = repo.findByReservaId(reservaId);
+        reserva.setEstadoReservaId(EstadoReservaEnum.EXPIRADO);
+    }
+
+    public void actualizar(Reserva reserva){
+        repo.save(reserva);
+    }
+
     
 
 }
