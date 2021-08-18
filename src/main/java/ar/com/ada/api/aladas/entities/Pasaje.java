@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "pasaje")
 public class Pasaje {
@@ -14,6 +16,7 @@ public class Pasaje {
     private Integer pasajeId;
 
     @OneToOne
+    //@JsonIgnore//para no tener problemas al traer pasajes
     @JoinColumn(name = "reserva_id", referencedColumnName = "reserva_id")
     private Reserva reserva;
 

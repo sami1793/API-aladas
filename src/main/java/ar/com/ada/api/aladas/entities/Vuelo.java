@@ -32,6 +32,7 @@ public class Vuelo {
     @Column (name = "codigo_moneda")
     private String codigoMoneda;
     
+    
     @OneToMany(mappedBy = "vuelo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Reserva> reservas = new ArrayList<>(); 
 

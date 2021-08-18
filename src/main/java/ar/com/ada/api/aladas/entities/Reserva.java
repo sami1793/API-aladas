@@ -16,6 +16,7 @@ public class Reserva {
     private Integer reservaId;
 
     @ManyToOne
+    @JsonIgnore//para no tener anidado al buscar vuelos BIEN
     @JoinColumn(name = "vuelo_id", referencedColumnName = "vuelo_id")
     private Vuelo vuelo;//muchas reservas para un mismo vuelo
 
@@ -32,6 +33,7 @@ public class Reserva {
     @Column(name = "fecha_vencimiento")
     private Date fechaVencimiento;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "reserva", cascade = CascadeType.ALL, fetch = FetchType.EAGER)//como es solo 1 a 1 no es necesario LAZY
     private Pasaje pasaje;
 
