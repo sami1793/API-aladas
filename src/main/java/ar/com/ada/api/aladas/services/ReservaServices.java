@@ -24,7 +24,7 @@ public class ReservaServices {
     @Autowired
     PasajeroService pasajeroService;
 
-    public Integer generarReserva(Integer vueloId, Integer pasajeroId) {
+    public Reserva generarReserva(Integer vueloId, Integer pasajeroId) {
         Reserva reserva = new Reserva();
 
         Vuelo vuelo = vueloServices.buscar(vueloId);
@@ -45,12 +45,20 @@ public class ReservaServices {
         reserva.setPasajero(pasajero);
 
         //pongo las relaciones bidireccionales
+        //una reserva tiene pasajero y vuelo
         pasajero.agregarReserva(reserva);
         vuelo.agregarReserva(reserva);
 
         repo.save(reserva);
 
-        return reserva.getReservaId();
+        return reserva;
     }
+
+    public Reserva buscarPorId(Integer reservaId){
+        Reserva reserva=repo.findByReservaId(reservaId);
+        return reserva;
+    }
+
+    
 
 }
